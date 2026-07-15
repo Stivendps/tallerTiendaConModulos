@@ -1,0 +1,23 @@
+// tienda farabella
+
+class Producto {
+    constructor(nombre,precio,categoria,stock) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.categoria = categoria;
+        this.stock = stock;
+    }
+    hayStock(cantidad){
+        return cantidad <= this.stock;
+    }
+    ficha(){
+        return `${this.nombre}: ${this.precio} categoria: ${this.categoria} En bodega = ${this.stock} `
+    }
+}
+
+let producto1 = new Producto("computador",2000000,"plata :",10);
+
+console.log(producto1.ficha());
+console.log(`Cuenta con stock: ${producto1.hayStock(20)}`);
+
+module.exports = Producto;

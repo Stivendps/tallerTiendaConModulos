@@ -1,0 +1,48 @@
+//
+const {
+    formatearPrecio,
+    calcularDescuento
+} = require("./utilidades");
+
+class Carrito {
+    constructor(usuario){
+        this.usuario = usuario;
+        this.items = [];
+    }
+
+    agregar(producto,cantidad){
+        if(!producto.hayStock(cantidad)){
+            return `sin stock`
+        }
+        this.items.push({producto,cantidad});
+        return "Agregado correctamente."
+    }
+
+    subtotal(){
+        let total = 0;
+        for (let i = 0; i < this.items.length; i++) {
+            total += this.items[i].producto.precio * this.items[i].cantidad;
+        }
+        return total;
+    }
+
+    total(){
+        let subtotal = this.subtotal();
+        if(this.usuario.esVip){
+            return calcularDescuento(subtotal,10);
+        }
+        return subtotal;
+        
+    }
+
+    recibo(){
+        let texto = this.usuario.saludo() + "\n";
+        for(let item of this.items){
+            texto += `${item.producto.nombre} x ${item.cantidad} = ${formatearPrecio(item.producto.precio)}\n`;
+        }
+        texto += `\n Total: ${formatearPrecio(this.total())}`;
+        return texto;
+    }
+}
+
+module.exports = Carrito;

@@ -1,0 +1,24 @@
+//
+
+const Producto = require("./producto");
+const Usuario =  require("./usuario");
+const Carrito = require("./carrito");
+const {
+    esEmailValido
+} = require("./utilidades");
+
+let usuario2 = new Usuario("miguel","miguel@correo.com",true);
+
+console.log(esEmailValido(usuario2.email));
+
+let producto2 = new Producto("tv",1000000,"oro",5);
+let producto3 = new Producto("radio",3000000,"plata",3);
+
+let carrito = new Carrito(usuario2);
+
+console.log(carrito.agregar(producto2,2));
+console.log(carrito.agregar(producto3,1));
+console.log(carrito.agregar(producto3,10));
+
+console.log(carrito.recibo());
+
